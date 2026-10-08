@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+@model EmailToAll.Models.Signup
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign up - EmailToAll</title>
+    <link rel="stylesheet" href="~/css/signup.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">EmailToAll</div>
+        <div class="heading">Create a new account</div>
+
+        <form id="SignupForm">
+            <input type="email" placeholder="Email address" id="Email" required>
+            <input type="password" placeholder="New password" id="Password" required>
+            <input type="password" placeholder="Confirm password" id="ConfirmPass" required>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+
+        <div class="login">
+            <a href="#">Already have an account?</a>
+        </div>
+    </div>
+
+    <!-- jQuery is required by Signupajax.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Ajax/Signupajax.js"></script>
+</body>
+</html>

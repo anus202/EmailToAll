@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>EmailToAll</RootNamespace>
+		<AssemblyName>EmailToAll</AssemblyName>
+		<UserSecretsId>7d1c0b9e-3f4a-4f0e-9a52-5c2e8b6a41d3</UserSecretsId>
+
+		<Version>1.0.0</Version>
+		<Authors>Anas Khan</Authors>
+		<Description>ASP.NET Core Web API with signup, login, JWT authentication and email OTP verification.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MailKit" Version="4.17.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.29" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.29" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.29" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.29">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.22.0" />
+	</ItemGroup>
+
+</Project>
