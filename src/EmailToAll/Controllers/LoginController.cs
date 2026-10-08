@@ -83,7 +83,7 @@ namespace EmailToAll.Controllers
 
         [AllowAnonymous]
         [HttpPost("PasswordReset")]
-        public async Task<JsonResult> PasswordReset([FromBody] LoginPayload data)
+        public async Task<JsonResult> PasswordReset([FromBody] PasswordResetPayload data)
         {
             try
             {

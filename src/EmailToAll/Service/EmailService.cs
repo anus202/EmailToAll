@@ -31,7 +31,10 @@ namespace EmailToAll.Service
                 await smtp.ConnectAsync(
                     _configuration["EmailSettings:SmtpServer"],
                     int.Parse(_configuration["EmailSettings:Port"]),
-                    SecureSocketOptions.StartTls
+                    // STARTTLS is always on unless explicitly disabled for a local test server.
+                    _configuration.GetValue("EmailSettings:UseStartTls", true)
+                        ? SecureSocketOptions.StartTls
+                        : SecureSocketOptions.None
                 );
 
                 await smtp.AuthenticateAsync(

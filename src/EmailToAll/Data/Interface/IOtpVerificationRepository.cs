@@ -1,4 +1,4 @@
-﻿using EmailToAll.Models;
+using EmailToAll.Models;
 
 namespace EmailToAll.Data.Interface
 {
@@ -9,5 +9,7 @@ namespace EmailToAll.Data.Interface
         Task CreateAsync(OtpVerification otpVerification);
         Task UpdateAsync(OtpVerification otpVerification);
 
+        /// <summary>Returns the unused, unexpired OTP matching the email and code, or null.</summary>
+        Task<OtpVerification?> GetValidAsync(string email, string code);
     }
 }

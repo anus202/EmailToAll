@@ -1,4 +1,4 @@
-﻿using EmailToAll.Data.Interface;
+using EmailToAll.Data.Interface;
 using EmailToAll.Data.Repository;
 
 namespace EmailToAll.Data
@@ -7,8 +7,8 @@ namespace EmailToAll.Data
     {
         ISignupRepository Signup {  get; }
         IOtpVerificationRepository Otp { get; }
-
-
+        IEmailSetupRepository EmailSetup { get; }
+        IEmailHistoryRepository EmailHistory { get; }
 
         Task SaveAsync();
     }

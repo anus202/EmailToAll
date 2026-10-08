@@ -1,4 +1,4 @@
-﻿using EmailToAll.Models;
+using EmailToAll.Models;
 
 namespace EmailToAll.Data.Interface
 {
@@ -9,5 +9,6 @@ namespace EmailToAll.Data.Interface
         Task UpdateAsync (Signup signup);
         Task DeleteAsync(int id);
         Task <Signup> GetByIdAsync(int id);
+        Task<Signup?> GetByEmailAsync(string email);
     }
 }

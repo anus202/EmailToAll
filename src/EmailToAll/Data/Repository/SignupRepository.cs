@@ -53,6 +53,11 @@ namespace EmailToAll.Data.Repository
             }
         }
 
+        public async Task<Signup?> GetByEmailAsync(string email)
+        {
+            return await _context.Signups.FirstOrDefaultAsync(s => s.Email == email);
+        }
+
         public async Task<Signup> GetByIdAsync(int id)
         {
             try

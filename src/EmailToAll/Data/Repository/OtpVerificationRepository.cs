@@ -53,6 +53,15 @@ namespace EmailToAll.Data.Repository
             }
         }
 
+        public async Task<OtpVerification?> GetValidAsync(string email, string code)
+        {
+            return await _context.OtpVerifications.FirstOrDefaultAsync(x =>
+                x.Email == email &&
+                x.OtpCode == code &&
+                !x.IsUsed &&
+                x.ExpiryTime > DateTime.UtcNow);
+        }
+
         public async Task UpdateAsync(OtpVerification otpVerification)
         {
             try

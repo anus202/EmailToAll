@@ -33,8 +33,8 @@ if (!builder.Environment.IsDevelopment())
     }
 }
 
-// Add Controllers
-builder.Services.AddControllersWithViews();
+// Add Controllers (REST API only; the UI lives in /frontend)
+builder.Services.AddControllers();
 
 // Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
@@ -44,6 +44,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 builder.Services.AddScoped<ISignupRepository, SignupRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IOtpVerificationRepository, OtpVerificationRepository>();
+builder.Services.AddScoped<IEmailSetupRepository, EmailSetupRepository>();
+builder.Services.AddScoped<IEmailHistoryRepository, EmailHistoryRepository>();
 builder.Services.AddScoped<IEncryptionRepository, EncryptionService>();
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<SignupService>();
@@ -52,6 +54,10 @@ builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<EncryptionService>();
 builder.Services.AddScoped<OtpService>();
 builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<SmtpProviderService>();
+builder.Services.AddScoped<EmailSetupService>();
+builder.Services.AddScoped<SendEmailService>();
+builder.Services.AddScoped<EmailHistoryService>();
 
 // CORS
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
@@ -125,11 +131,12 @@ builder.Services.AddAuthentication(options =>
             }
             return Task.CompletedTask;
         },
-        OnChallenge = context =>
+        OnChallenge = async context =>
         {
+            // This is an API: answer 401 so the frontend can send the user back to the login page.
             context.HandleResponse();
-            context.Response.Redirect("/Autantication/Login");
-            return Task.CompletedTask;
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await context.Response.WriteAsJsonAsync(new { success = false, message = "Unauthorized" });
         }
     };
 });
@@ -155,7 +162,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 app.UseRouting();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
